@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MakeClickable : MonoBehaviour
 {
+    private bool isClickable;
+
     public Material Clickable;
     public Material notClickable;
     public float clickRange = 10f;
@@ -24,10 +26,20 @@ public class MakeClickable : MonoBehaviour
         if(Vector3.Distance(gameObject.transform.position, wreckingBall.transform.position) <= clickRange)
         {
             rend.material = Clickable;
+            isClickable = true;
         }
         else
         {
             rend.material = notClickable;
+            isClickable = false;
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        if(isClickable)
+        {
+            Debug.Log("Clicked");
         }
     }
 }
