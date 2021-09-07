@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float autoSpeed = 5f;
 
     private float xInput, zInput;
+
+    public Canvas LinkModeUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +41,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector3.forward * (autoSpeed*2));
         }
+    }
+
+    private void OnMouseDown()
+    {
+        LinkModeUI.gameObject.SetActive(true);
     }
 }
