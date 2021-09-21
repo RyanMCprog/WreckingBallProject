@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float xInput, zInput;
 
     public Canvas LinkModeUI;
+    //public LinkMode LinkingMode; Scraped
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //LinkingMode.EnterLinkMode(); Scrap
         LinkModeUI.gameObject.SetActive(true);
     }
 }

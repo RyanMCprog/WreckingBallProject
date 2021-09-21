@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 public class EndLinkMode : MonoBehaviour, IPointerEnterHandler
 {
     public Canvas LinkModeUI;
+    //public LinkMode LinkingMode; Scarped
     
     public void OnPointerEnter(PointerEventData eventData)
     {
         LinkModeUI.gameObject.SetActive(false);
+        //LinkingMode.ExitLinkMode(); Scraped
     }
 }
