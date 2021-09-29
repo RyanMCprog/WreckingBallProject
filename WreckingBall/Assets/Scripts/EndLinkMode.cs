@@ -6,11 +6,15 @@ using UnityEngine.EventSystems;
 public class EndLinkMode : MonoBehaviour, IPointerEnterHandler
 {
     public Canvas LinkModeUI;
-    //public LinkMode LinkingMode; Scarped
+    //public GrapplingHook CanHook; 
+    //add when stop grapple is there
+    
     
     public void OnPointerEnter(PointerEventData eventData)
     {
         LinkModeUI.gameObject.SetActive(false);
-        //LinkingMode.ExitLinkMode(); Scraped
+        //add when stopgrapple is implemented
+        //CanHook.EndGrappleMode();
+       
     }
 }

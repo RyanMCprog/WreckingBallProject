@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GrapplingHook : MonoBehaviour
 {
     private LineRenderer lr;
     private Vector3 GrapplePoint;
     public LayerMask WhatisGrappleable;
+    public Transform GrappleTip, player;
+    public Camera mainCamera;
+    private float maxDistance = 100f;
+    private SpringJoint joint;
 
     private bool EnterGrappleMode = false;
 
@@ -19,7 +24,17 @@ public class GrapplingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(EnterGrappleMode)
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                startGrapple();
+            }
+        }
+        else if(!EnterGrappleMode || Input.GetMouseButtonUp(0))
+        {
+            stopGrapple();
+        }
     }
 
     public void StartGrappleMode()
@@ -30,5 +45,34 @@ public class GrapplingHook : MonoBehaviour
     public void EndGrappleMode()
     {
         EnterGrappleMode = false;
+    }
+
+    void startGrapple()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, maxDistance, WhatisGrappleable))
+        {
+            GrapplePoint = hit.point;
+            joint = player.gameObject.AddComponent<SpringJoint>();
+            joint.autoConfigureConnectedAnchor = false;
+            joint.connectedAnchor = GrapplePoint;
+
+            float distanceFromPoint = Vector3.Distance(player.position, GrapplePoint);
+
+            //the distance the grapple will try to keep from grapple point
+            joint.maxDistance = distanceFromPoint * 0.8f;
+            joint.minDistance = distanceFromPoint * 0.25f;
+
+            //change theses values to fit game
+            joint.spring = 4.5f;
+            joint.damper = 7f;
+            joint.massScale = 4.5f;
+        }
+    }
+
+    void stopGrapple()
+    {
+
     }
 }

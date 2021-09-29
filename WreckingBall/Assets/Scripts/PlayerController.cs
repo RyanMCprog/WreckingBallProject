@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private float xInput, zInput;
 
     public Canvas LinkModeUI;
-    //public LinkMode LinkingMode; Scraped
+    public GrapplingHook CanHook;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //LinkingMode.EnterLinkMode(); Scrap
+        CanHook.StartGrappleMode();
         LinkModeUI.gameObject.SetActive(true);
     }
 }
