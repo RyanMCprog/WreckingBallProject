@@ -6,7 +6,8 @@ using UnityEngine.UIElements;
 public class GrapplingHook : MonoBehaviour
 {
     private LineRenderer lr;
-    private Vector3 GrapplePoint;
+    [HideInInspector]
+    public Vector3 GrapplePoint;
     public LayerMask WhatisGrappleable;
     public Transform GrappleTip, player;
     public Camera mainCamera;
@@ -31,10 +32,15 @@ public class GrapplingHook : MonoBehaviour
                 startGrapple();
             }
         }
-        else if(!EnterGrappleMode || Input.GetMouseButtonUp(0))
+        else if(!EnterGrappleMode)
         {
             stopGrapple();
         }
+    }
+
+    private void LateUpdate()
+    {
+        DrawRope();
     }
 
     public void StartGrappleMode()
@@ -53,26 +59,46 @@ public class GrapplingHook : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, maxDistance, WhatisGrappleable))
         {
-            GrapplePoint = hit.point;
-            joint = player.gameObject.AddComponent<SpringJoint>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = GrapplePoint;
+            if(hit.transform.gameObject.GetComponent<MakeClickable>().isClickable)
+            {
+                GrapplePoint = hit.point;
+                joint = player.gameObject.AddComponent<SpringJoint>();
+                joint.autoConfigureConnectedAnchor = false;
+                joint.connectedAnchor = GrapplePoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position, GrapplePoint);
+                float distanceFromPoint = Vector3.Distance(player.position, GrapplePoint);
 
-            //the distance the grapple will try to keep from grapple point
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.25f;
+                //the distance the grapple will try to keep from grapple point
+                joint.maxDistance = distanceFromPoint * 0.6f;
+                joint.minDistance = distanceFromPoint * 0.18f;
 
-            //change theses values to fit game
-            joint.spring = 4.5f;
-            joint.damper = 7f;
-            joint.massScale = 4.5f;
+                //change theses values to fit game
+                joint.spring = 5.5f;
+                joint.damper = 5f;
+                joint.massScale = 4.5f;
+
+                lr.positionCount = 2;
+            }
+            
         }
+    }
+
+    void DrawRope()
+    {
+        if (!joint) return;
+
+        lr.SetPosition(0, GrappleTip.position);
+        lr.SetPosition(1, GrapplePoint);
     }
 
     void stopGrapple()
     {
+        lr.positionCount = 0;
+        Destroy(joint);
+    }
 
+    public bool isGrappling()
+    {
+        return joint != null;
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MakeClickable : MonoBehaviour
 {
-    private bool isClickable;
+    [HideInInspector]
+    public bool isClickable;
 
     public Material Clickable;
     public Material notClickable;

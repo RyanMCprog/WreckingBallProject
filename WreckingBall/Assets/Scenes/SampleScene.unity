@@ -188,7 +188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 56411457}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrappleEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +655,8 @@ GameObject:
   - component: {fileID: 589694223}
   - component: {fileID: 589694225}
   - component: {fileID: 589694224}
-  m_Layer: 0
+  - component: {fileID: 589694226}
+  m_Layer: 6
   m_Name: GrappleDevice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +670,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589694218}
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0.61, y: 6.7, z: -37.44}
   m_LocalScale: {x: 0.2, y: 0.5, z: 0.20000002}
   m_Children:
@@ -765,6 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866868466e5c79c48a2ebadee6315868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GrapplePoint: {x: 0, y: 0, z: 0}
   WhatisGrappleable:
     serializedVersion: 2
     m_Bits: 64
@@ -790,7 +792,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -869,6 +871,19 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &589694226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589694218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cacc0d3093aac754782b236a58d1658d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrappleHook: {fileID: 589694224}
 --- !u!1 &634631695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinkModeUI: {fileID: 1819542748}
+  CanHook: {fileID: 589694224}
 --- !u!1 &1133799354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,6 +1686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinkModeUI: {fileID: 1819542748}
+  CanHook: {fileID: 589694224}
 --- !u!1001 &1230416628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2296,6 +2313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinkModeUI: {fileID: 1819542748}
+  CanHook: {fileID: 589694224}
 --- !u!1 &1819542745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,6 +2506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinkModeUI: {fileID: 1819542748}
+  CanHook: {fileID: 589694224}
 --- !u!1 &1883944341
 GameObject:
   m_ObjectHideFlags: 0
