@@ -70,10 +70,10 @@ public class GrapplingHook : MonoBehaviour
 
                 //the distance the grapple will try to keep from grapple point
                 joint.maxDistance = distanceFromPoint * 0.6f;
-                joint.minDistance = distanceFromPoint * 0.18f;
+                joint.minDistance = distanceFromPoint * 0.15f;
 
                 //change theses values to fit game
-                joint.spring = 5.5f;
+                joint.spring = 5f;
                 joint.damper = 5f;
                 joint.massScale = 4.5f;
 
